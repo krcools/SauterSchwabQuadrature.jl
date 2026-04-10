@@ -56,6 +56,7 @@ function genI(i1, i2)
             return (2, 1, 3)
         end
     end
+    return (1,2,3)
 end
 
 function reorder_fast(t, s, strat::CommonEdge)
@@ -113,6 +114,7 @@ function assign(i1, i2, i3, j1, j2, j3)
     elseif (i1, i2, i3) == (3, 2, 1)
         return (j3, j2, j1)
     end
+    return (1,2,3)
 end
 
 function reorder_fast(t, s, strat::CommonFace)
