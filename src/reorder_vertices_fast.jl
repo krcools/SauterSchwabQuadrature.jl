@@ -15,8 +15,8 @@ function reorder_fast(t, s, strat::CommonVertex)
     T = eltype(t[1])
     tol = 1e3 * eps(T)
 
-    I = 0
-    J = 0
+    I = 1
+    J = 1
     e = 1
     for i in 1:3
         v = t[i]
@@ -67,8 +67,8 @@ function reorder_fast(t, s, strat::CommonEdge)
 
     # I = zeros(Int, 3)
     # J = zeros(Int, 3)
-    i1, i2 = 0, 0
-    j1, j2 = 0, 0
+    i1, i2 = 1, 2
+    j1, j2 = 1, 2
     e = 1
     for i in 1:3
         v = t[i]
@@ -124,8 +124,8 @@ function reorder_fast(t, s, strat::CommonFace)
 
 
     I = (1, 2, 3)
-    j1, j2, j3 = 0, 0, 0
-    i1, i2, i3 = 0, 0, 0
+    j1, j2, j3 = 1, 2, 3
+    i1, i2, i3 = 1, 2, 3
     e = 1
     # numhits = 0
     for (i, v) in pairs(t)
