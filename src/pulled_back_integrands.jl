@@ -88,7 +88,7 @@ function (::CommonFaceQuad)(f, η1, η2, η3, ξ)
 
     ξη1 = ξ * η1 # auxiliary
 
-    mξ   = (1 - ξ)# auxiliary
+    mξ = (1 - ξ)# auxiliary
     mξη1 = (1 - ξη1)# auxiliary
 
     # only 4 different terms occur as argument:

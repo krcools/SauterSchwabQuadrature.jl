@@ -301,3 +301,151 @@ end
 
     @test J == [3, 4, 1, 2]
 end
+
+
+
+#implements allocation free reorder routines without accesing the inverse permutations K and L
+
+function genI(n)
+    if n == 1
+        return (1, 2, 3)
+    elseif n == 2
+        return (2, 1, 3)
+    elseif n == 3
+        return (3, 1, 2)
+    end
+end
+
+function reorder_forward(t, s, strat::CommonVertex)
+
+    T = eltype(t[1])
+    tol = 1e3 * eps(T)
+
+    I = 1
+    J = 1
+    e = 1
+    for i in 1:3
+        v = t[i]
+        for j in 1:3
+            w = s[j]
+            if norm(w - v) < tol
+                I = i
+                J = j
+                e += 1
+                break
+            end
+        end
+        e == 2 && break
+    end
+
+
+    return genI(I), genI(J)
+end
+
+function genI(i1, i2)
+    if i1 == 1
+        if i2 == 2
+            return (2, 3, 1)
+        elseif i2 == 3
+            return (3, 2, 1)
+        end
+    elseif i1 == 2
+        if i2 == 3
+            return (3, 1, 2)
+        elseif i2 == 1
+            return (1, 3, 2)
+        end
+    elseif i1 == 3
+        if i2 == 1
+            return (1, 2, 3)
+        elseif i2 == 2
+            return (2, 1, 3)
+        end
+    end
+    return (1,2,3)
+end
+
+function reorder_forward(t, s, strat::CommonEdge)
+
+    T = eltype(t[1])
+    tol = 1e3 * eps(T)
+    i1, i2 = 1, 2
+    j1, j2 = 1, 2
+    e = 1
+    for i in 1:3
+        v = t[i]
+        for j in 1:3
+            w = s[j]
+            if norm(w - v) < tol
+                if e == 1
+                    i1 = i
+                    j1 = j
+                elseif e == 2
+                    i2 = i
+                    j2 = j
+                end
+                e += 1
+                break
+            end
+            # e == 3 && break
+        end
+        e == 3 && break
+    end
+    return genI(i1, i2), genI(j1, j2)
+end
+function assign(i1, i2, i3, j1, j2, j3)
+    if (i1, i2, i3) == (1, 2, 3)
+        return (j1, j2, j3)
+    elseif (i1, i2, i3) == (2, 3, 1)
+        return (j2, j3, j1)
+    elseif (i1, i2, i3) == (3, 1, 2)
+        return (j3, j1, j2)
+    elseif (i1, i2, i3) == (1, 3, 2)
+        return (j1, j3, j2)
+    elseif (i1, i2, i3) == (2, 1, 3)
+        return (j2, j1, j3)
+    elseif (i1, i2, i3) == (3, 2, 1)
+        return (j3, j2, j1)
+    end
+end
+
+function reorder_forward(t, s, strat::CommonFace)
+
+    T = eltype(t[1])
+    tol = 1e3 * eps(T)
+    # tol = 1e5 * eps(T)
+    # tol = sqrt(eps(T))
+
+
+    I = (1, 2, 3)
+    j1, j2, j3 = 1, 2, 3
+    i1, i2, i3 = 1, 2, 3
+    e = 1
+    # numhits = 0
+    for (i, v) in pairs(t)
+        for (j, w) in pairs(s)
+            if norm(w - v) < tol
+                if e == 1
+                    j1 = j
+                    i1 = i
+                elseif e == 2
+                    j2 = j
+                    i2 = i
+                elseif e == 3
+                    j3 = j
+                    i3 = i
+                end
+                e += 1
+            end
+            e == 4 && break
+        end
+        e == 4 && break
+    end
+
+    # @assert numhits == 3
+    # @assert all(J .!= -1)
+
+    return I, assign(i1, i2, i3, j1, j2, j3)
+end
+reorder_forward(a, b, c) = reorder(a, b, c)[1:2]
+

@@ -23,5 +23,4 @@ include("sauterschwabintegral.jl")
 include("pulled_back_integrands.jl")
 include("reorder_vertices.jl")
 
-
 end
