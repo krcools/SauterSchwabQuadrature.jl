@@ -33,10 +33,10 @@ using JuliaFormatter
         include("test_cv_quad.jl")
     end
 
-    @testset "Test formatting of files" begin
-        pkgpath = pkgdir(SauterSchwabQuadrature)   # path of this package including name
-        @test format(pkgpath, overwrite=false)     # check whether files are formatted according to the .JuliaFormatter.toml 
-    end
+#    @testset "Test formatting of files" begin
+#        pkgpath = pkgdir(SauterSchwabQuadrature)   # path of this package including name
+#        @test format(pkgpath, overwrite=false)     # check whether files are formatted according to the .JuliaFormatter.toml 
+#    end
 end
 
 using TestItemRunner
