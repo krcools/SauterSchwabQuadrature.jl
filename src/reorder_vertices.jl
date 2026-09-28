@@ -1,4 +1,4 @@
-function reorder!(I, J, K, L, t, s, strat::CommonVertex)
+@inline function reorder!(I, J, K, L, t, s, strat::CommonVertex)
 
     T = eltype(t[1])
     tol = 1e3 * eps(T)
@@ -72,7 +72,7 @@ function reorder(t, s, strat::Union{CommonVertex,CommonEdge,CommonFace})
 end
 
 
-function reorder!(I, J, K, L, t, s, strat::CommonEdge)
+@inline function reorder!(I, J, K, L, t, s, strat::CommonEdge)
 
     T = eltype(t[1])
     tol = 1e3 * eps(T)
@@ -135,7 +135,7 @@ function reorder!(I, J, K, L, t, s, strat::CommonEdge)
     return I, J, K, L
 end
 
-function reorder!(I, J, K, L, t, s, strat::CommonFace)
+@inline function reorder!(I, J, K, L, t, s, strat::CommonFace)
 
     T = eltype(t[1])
     tol = 1e3 * eps(T)
