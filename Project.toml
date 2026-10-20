@@ -11,6 +11,7 @@ TestItems = "1c621080-faea-4a02-84b6-bbd5e436b8fe"
 [compat]
 FastGaussQuadrature = "0.5, 1"
 StaticArrays = "0.12, 1"
+CompScienceMeshes = "0.9"
 TestItemRunner = "0.2.3, 1"
 TestItems = "0.1.1, 1.0"
 julia = "0.7, 1"
